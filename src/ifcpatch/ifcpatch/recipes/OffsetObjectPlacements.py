@@ -32,7 +32,7 @@ class Patcher:
         x: typing.Union[str, float] = "0",
         y: typing.Union[str, float] = "0",
         z: typing.Union[str, float] = "0",
-        should_rotate_first: bool = True,
+        should_rotate_first: typing.Union[str, bool] = "True",
         ax: typing.Optional[typing.Union[str, float]] = "",
         ay: typing.Optional[typing.Union[str, float]] = "",
         az: typing.Optional[typing.Union[str, float]] = "",
@@ -95,7 +95,12 @@ class Patcher:
         self.x = float(x)
         self.y = float(y)
         self.z = float(z)
-        self.should_rotate_first = should_rotate_first
+        if isinstance(should_rotate_first, bool):
+            self.should_rotate_first = should_rotate_first
+        elif should_rotate_first=="False":
+            self.should_rotate_first = False
+        else:
+            self.should_rotate_first = True
         self.ax = None
         self.ay = None
         self.az = None
